@@ -9,6 +9,19 @@ Twitter: @rtweed
 
 Google Group for discussions, support, advice etc: [http://groups.google.co.uk/group/enterprise-web-developer-community](http://groups.google.co.uk/group/enterprise-web-developer-community)
 
+##Contents
+
+- userApplication: Source code for EWD.js user application that fetches and graphs blood pressure values
+
+- node_modules: Source for back-end code for user application
+
+- RESTServer: configuration file for EWD REST Server
+
+- FHIRServer: 
+  - ec2: FHIR parsing module running on EC2 server - serves up user-entered blood results
+  - georgesServer: FHIR parsing and support modules running on George Lilly's server - serves up blood pressure
+    results from CCDA held in JSON-formatted global storage
+
 
 ## License
 
