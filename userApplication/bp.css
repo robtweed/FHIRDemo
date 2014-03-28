@@ -1,0 +1,22 @@
+.topmargin {
+    margin-top: 50px;
+}
+
+.console {
+    width: 100%;
+    min-height: 150px;
+}
+
+.headerText {
+	color: #f8f8f8;
+}
+
+.graph {
+	height: 400px;
+	width: 600px;
+}
+
+.formWidth {
+	height: 400px;
+	width: 600px;
+}

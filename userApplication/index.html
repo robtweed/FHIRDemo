@@ -1,0 +1,168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="author" content="Simon Tweed" />
+
+    <link href="/bootstrap-3.0.0/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="/select2/select2.css" rel="stylesheet" />
+    <link href="/toastr/toastr.css" rel="stylesheet" />
+    <link href="bp.css" rel="stylesheet" />
+    <link href="examples.css" rel="stylesheet" />
+
+
+    
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/bootstrap-3.0.0/assets/js/html5shiv.js"></script>
+      <script src="/bootstrap-3.0.0/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="shortcut icon" href="/bootstrap-3.0.0/assets/ico/favicon.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/bootstrap-3.0.0/assets/ico/apple-touch-icon-144-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/bootstrap-3.0.0/assets/ico/apple-touch-icon-114-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/bootstrap-3.0.0/assets/ico/apple-touch-icon-72-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="/bootstrap-3.0.0/assets/ico/apple-touch-icon-57-precomposed.png" />
+
+    <script src="/socket.io/socket.io.js"></script>
+    <!--[if (IE 6)|(IE 7)|(IE 8)]><script type="text/javascript" src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script><![endif]-->
+
+    <title id="ewd-title"></title>
+    
+  </head>
+
+  <body>
+
+    <!-- Modal Login Form -->
+
+    <div id="loginPanel" class="modal fade">
+      <div class="modal-dialog">
+        <div id="loginModalPanel" class="modal-content">
+          <div class="modal-header">
+            <h3 id="ewd-loginPanel-title"></h3>
+          </div>
+          <div id="loginPanelBody" class="modal-body">
+            <form id="loginForm" role="form">
+              <legend>Please log in</legend>
+              <div class="form-group">
+                <label for="username">Username: </label>
+                <input type="text" class="form-control focusedInput" id="username" placeholder="Enter your username" />
+              </div>
+              <div class="form-group">
+                <label for="password">Password: &nbsp;</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter your password" />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <a href="#" id="loginBtn" style="display: none" class="btn btn-primary">Login</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Page Definition -->
+
+    <!-- NavBar header -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+              <div class="navbar-header">
+                <div class="navbar-brand visible-xs" id="ewd-navbar-title-phone"></div>
+                <div class="navbar-brand hidden-xs" id="ewd-navbar-title-other"></div>
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              <div class="navbar-collapse collapse navbar-ex1-collapse">
+                <form class="navbar-form navbar-right">
+                  <div id="ewd-loggedInAs" class="headerText">
+                    &nbsp;
+                  </div>
+                  <button id="newPatient" class="btn btn-default" style="display: none;">A Button</button>
+                </form>
+              </div>
+            </div>
+    </nav>
+
+    <!-- main menu -->
+    <ul class="nav nav-pills nav-stacked collapse" id="ewd-mainMenu">
+        <li class="nav-header disabled"><a id="ewd-menu-title"></a></li>
+    </ul>
+
+    <!-- Main body -->
+    <br>
+
+    <div id="graphContainer" class="container topmargin collapse">    
+        <div class="row">
+            <div id="graphCol" class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <br>
+                        <div id="placeholder" style="width:100%;height:250px;" class="demo-placeholder"></div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                <input type="text" class="form-control" id="sysInput" placeholder="Systolic Pressure">
+                            </div>
+                            <br>
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                <input type="text" class="form-control" id="diaInput" placeholder="Diastolic Pressure">
+                            </div>
+                            <br>
+                            <button type="button" class="btn btn-default" id="submitBpBtn">Add New Reading</button>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+    </div>
+
+
+  
+    
+
+    <!-- Bootstrap core JavaScript
+     ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript" src="/bootstrap-3.0.0/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="/bootstrap-3.0.0/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/select2/select2.js"></script>
+    <script type="text/javascript" src="/toastr/toastr.js"></script>
+    <script src="/ewdLite/EWD.js"></script>
+    <script type="text/javascript" src="/ewdLite/ewdBootstrap3.js"></script>
+
+    <!-- flot graph js -->
+    <script language="javascript" type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/flot/0.8.1/jquery.flot.min.js"></script>
+    <script language="javascript" type="text/javascript" src="jquery.flot.time.js"></script>
+
+
+    <!--
+    <script src="ewdBootstrap3.js"></script>
+    -->
+    
+    <!--  
+        Add your application's app.js logic here 
+        Change [yourapp] with the appropriate pathname for your application
+    -->
+    
+    <script type="text/javascript" src="app.js"></script>
+
+    <!--  =======================================  -->
+    
+    
+  </body>
+</html>
